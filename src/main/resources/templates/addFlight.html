@@ -9,11 +9,11 @@
 	</head>
 	
 	<body>
-		<nav th:replace="fragments/fragment :: navbar"></nav>
+		<nav th:replace="fragments/fragment :: addFlight"></nav>
 		<h2>Hello!</h2>
 		
 		<h3>Tambah Penerbangan</h3>
-		<form th:action="@{/flight/add}" th:object="${flight}" method="POST">
+		<!--<form th:action="@{/flight/add}" th:object="${flight}" method="POST">
 			<input type="hidden" th:field="*{pilot}" />
 			Flight Number: <br>
 			<input type="text" name="flightNumber" />
@@ -28,6 +28,50 @@
 			<input type="date" name="time" />
 			<br><br>
 			<button type="submit">Submit</button>
+		</form> -->
+		
+		<form th:action="@{/flight/add/} + ${pilot.licenseNumber}" th:object="${pilot}" method="POST">
+			<table border="1">
+				<caption>Flights</caption>
+				<thead>
+					<tr>
+						<th style="text-align: center">Flight Number</th>
+						<th style="text-align: center">Origin</th>
+						<th style="text-align: center">Destination</th>
+						<th style="text-align: center">Time</th>
+						
+						<!-- formnovalidate: untuk override required di tiap input form -->
+						<th style="text-align: center">
+							<button type="submit" name="add" formnovalidate>Add more flight</button>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="flight,iterationStatus : *{pilotFlight}">
+						<td>
+							<input required type="text" th:field="*{pilotFlight[__${iterationStatus.index}__].flightNumber}" />
+						</td>
+						<td>
+							<input required type="text" th:field="*{pilotFlight[__${iterationStatus.index}__].origin}" />
+						</td>
+						<td>
+							<input required type="text" th:field="*{pilotFlight[__${iterationStatus.index}__].destination}" />
+						</td>
+						<td>
+							<input required type="date" th:field="*{pilotFlight[__${iterationStatus.index}__].time}" />
+						</td>
+						
+						<!-- 
+							If baru 1 form flight, tombol delete dihide
+						 -->
+						<td th:if="${iterationStatus.size} > 1">
+							<button type="submit" name="delete" 
+	               			th:value="${iterationStatus.index}" formnovalidate>Remove Flight</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<button name="submit" type="submit">Add Flight(s)</button>
 		</form>
 	</body>
 </html>

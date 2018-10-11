@@ -45,6 +45,10 @@ public class FlightModel implements Serializable{
 	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	@JsonIgnore
 	private PilotModel pilot;
+	
+	public FlightModel() {
+		super();
+	}
 
 	public long getId() {
 		return id;

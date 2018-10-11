@@ -8,7 +8,7 @@
 		<object th:include="fragments/fragment :: js" th:remove="tag"></object>
 	</head>
 	<body>
-		<nav th:replace="fragments/fragment :: navbar"></nav>
+		<nav th:replace="fragments/fragment :: viewPilot"></nav>
 	
 		<h3 th:text="'Pilot License Number : ' + ${pilot.licenseNumber}"></h3>
 		<h3 th:text="'Name : ' + ${pilot.name}"></h3>
