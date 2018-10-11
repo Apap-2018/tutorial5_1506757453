@@ -40,7 +40,7 @@ public class PilotController {
 	@RequestMapping(value = "/pilot/add", method = RequestMethod.POST)
 	private String addPilotSubmit(@ModelAttribute PilotModel pilot) {
 		pilotService.addPilot(pilot);
-		return "add";
+		return "update";
 	}
 	
 	@RequestMapping(value = "/pilot/view", method= RequestMethod.GET)
@@ -64,7 +64,7 @@ public class PilotController {
          pilot.setId(id);
 		 pilotService.updatePilot(pilot);
          
-	     return "add";
+	     return "update";
 	 }
 
 	 @RequestMapping(value = "/pilot/delete/{id}")

@@ -12,7 +12,7 @@
 		<nav th:replace="fragments/fragment :: addFlight"></nav>
 		<h2>Hello!</h2>
 		
-		<h3>Tambah Penerbangan</h3>
+		<h3 th:text="'Tambah Penerbangan untuk Pilot ' + ${pilot.name}"></h3>
 		<!--<form th:action="@{/flight/add}" th:object="${flight}" method="POST">
 			<input type="hidden" th:field="*{pilot}" />
 			Flight Number: <br>
